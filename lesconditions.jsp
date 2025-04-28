@@ -38,10 +38,34 @@ A = 10</br>
 B = 20</br>
 C = 15</br>
 Oui C est compris entre A et B</p>
+<%-- Vérification si C est compris entre A et B --%>
+<% if (valeurA != null && valeurB != null && valeurC != null) { %>
+    <%-- Conversion des valeurs en entiers pour la comparaison --%>
+    <% int intValeurA = Integer.parseInt(valeurA); %>
+    <% int intValeurB = Integer.parseInt(valeurB); %>
+    <% int intValeurC = Integer.parseInt(valeurC); %>
+    
+    <%-- Condition if pour vérifier si C est compris entre A et B --%>
+    <% if (intValeurC >= intValeurA && intValeurC <= intValeurB) { %>
+        <p>Oui, C est compris entre A et B.</p>
+    <% } else { %>
+        <p>Non, C n'est pas compris entre A et B.</p>
+    <% } %>
+<% } %>
 
 <h2>Exercice 2 : Pair ou Impair ?</h2>
 <p>Écrivez un programme pour vérifier si un nombre est pair ou impair en utilisant une structure if</p>
+<%-- Vérification si le nombre est pair ou impair --%>
+<% if (valeurPairImpair != null) { %>
+    <%-- Conversion de la valeur en entier pour la comparaison --%>
+    <% int intValeurPairImpair = Integer.parseInt(valeurPairImpair); %>
 
+    <%-- Condition if pour vérifier si le nombre est pair ou impair --%>
+    <% if (intValeurPairImpair % 2 == 0) { %>
+        <p>Le nombre <%= intValeurPairImpair %> est pair.</p>
+    <% } else { %>
+        <p>Le nombre <%= intValeurPairImpair %> est impair.</p>
+    <% } %>
 <% } %>
 <p><a href="index.html">Retour au sommaire</a></p>
 </body>
