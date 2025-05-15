@@ -42,7 +42,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title><b> Tableau </b></title>
+    <title> Tableau </title>
     <style>
         body {
             font-family: Arial, sans-serif;
