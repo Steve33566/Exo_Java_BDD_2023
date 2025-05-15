@@ -34,7 +34,7 @@
         }
     } else if ("vider".equals(action)) {
         tableau.clear();
-        message = "Tableau vidé avec succès.";
+        message = "Tableau vidé avec grand succès.";
     }
 %>
 
@@ -50,7 +50,7 @@
             margin: 40px;
         }
         .container {
-            background-color: white;
+            background-color: black;
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 0 10px #ccc;
