@@ -42,7 +42,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title> Tableau </title>
+    <title>Gestion du Tableau </title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -85,7 +85,7 @@
 <body>
 
 <div class="container">
-    <h2>Gestion du Tableau</h2>
+    <h2>Tableau</h2>
     <form method="post">
         <label>Entrer une valeur :</label>
         <input type="number" name="valeur" />
