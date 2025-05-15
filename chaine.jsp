@@ -1,5 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-    String bonjour = "salut la compagnie";
-    out.println(bonjour);
-%>
+public class Chaine {
+    public static void main(String[] args) {
+        String bonjour = "salut la compagnie";
+        System.out.println(bonjour.toUpperCase());
+    }
+}
