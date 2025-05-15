@@ -54,7 +54,7 @@
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 0 10px #ccc;
-            max-width: 500px;
+            max-width: 450px;
             margin: auto;
         }
         input[type="number"] {
