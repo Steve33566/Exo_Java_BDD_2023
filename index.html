@@ -1,29 +1,412 @@
-<html>
+<!doctype html>
+<html lang="fr">
 <head>
-<title>Java</title>
-<meta charset="UTF-8">  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AS Menucourt - Site</title>
+  <meta name="description" content="Site vitrine simple pour AS Menucourt - Accueil, À propos, Galerie, Contact">
+  
+  <!-- 🌐 STYLE RESPONSIVE + MENU HAMBURGER -->
+  <style>
+    /* ---------- RESET & VARIABLES ---------- */
+    :root {
+      --accent: #0077cc;
+      --accent-light: #e0f2ff;
+      --dark: #1a1a1a;
+      --light: #ffffff;
+      --muted: #666;
+      --bg: #f7f8fa;
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: system-ui, sans-serif;
+      color: var(--dark);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.2rem;
+    }
+
+    /* ---------- HEADER ---------- */
+    header {
+      background: var(--light);
+      border-bottom: 1px solid #ddd;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--accent);
+    }
+
+    /* ---------- NAV LINKS ---------- */
+    .navlinks {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .navlinks a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .navlinks a:hover { color: var(--accent); }
+
+    /* ---------- HAMBURGER ---------- */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 8px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--dark);
+      border-radius: 3px;
+      transition: 0.3s;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translateY(8px);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translateY(-8px);
+    }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      text-align: center;
+      padding: 4rem 1rem;
+      background: var(--accent-light);
+      border-radius: var(--radius);
+      margin-top: 1rem;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .hero p { font-size: 1.1rem; color: var(--dark); }
+
+    button {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      padding: 0.6rem 1.2rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover { background: #005fa3; }
+
+    /* ---------- ABOUT ---------- */
+    .about {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: var(--light);
+      border-radius: var(--radius);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      padding: 1.2rem;
+    }
+
+    h2 {
+      margin: 2.5rem 0 1rem;
+      color: var(--accent);
+      font-size: 1.6rem;
+    }
+
+    /* ---------- GALLERY ---------- */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .gallery-grid img:hover { transform: scale(1.03); }
+
+    /* ---------- CONTACT ---------- */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: var(--radius);
+      padding: 0.6rem;
+      font-size: 1rem;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-light);
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      background: var(--dark);
+      color: #fff;
+      text-align: center;
+      padding: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    /* ---------- MODAL ---------- */
+    .modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0,0,0,0.6);
+      padding: 1rem;
+    }
+
+    .modal.show { display: flex; }
+
+    .modal .content {
+      background: var(--light);
+      border-radius: var(--radius);
+      padding: 0.6rem;
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    .modal img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 700px) {
+      .hamburger { display: flex; }
+
+      .navlinks {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 0.8rem;
+        margin-top: 1rem;
+      }
+
+      .navlinks.show {
+        display: flex;
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-5px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .hero { padding: 2.5rem 1rem; }
+      .hero h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.4rem; }
+      button { width: 100%; }
+    }
+  </style>
 </head>
-<body bgcolor=white>
 
-<table border="0">
-<tr>
-<td>
-</td>
-<td>
-<h1>Exercices de programmation en JSP (Java)</h1>
-<p>Ceci est votre page d'exercices Java : Nom Prénom
-</td>
-</tr>
-</table>
-<h2>Liste de vos exercices</h2>
-<p>
-<ol>
-<li>Série d'exercices sur les boucles : <a href="lesboucles.jsp"> Les boucles</a>
-<li>Série d'exercices sur les conditions : <a href="lesconditions.jsp"> Les conditions</a>
-<li>Série d'exercices sur les chaines de caractères : <a href="leschaines.jsp"> Les String</a>
-<li>Série d'exercices sur les tableaux : <a href="lestableaux.jsp"> Les tableaux</a>
-<li>Série d'exercices sur les Bases de Données : <a href="Select_BDD.jsp"> Travailler avec une Base de Données</a>
-</ol>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="1" y="1" width="22" height="22" rx="4" fill="var(--accent)"/>
+            <path d="M6 15L9 11l4 6 5-10" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>AS Menucourt</span>
+        </div>
 
+        <!-- 🌟 Bouton hamburger -->
+        <button class="hamburger" aria-label="Ouvrir le menu">
+          <span></span><span></span><span></span>
+        </button>
+
+        <div class="navlinks" role="navigation" aria-label="menu principal">
+          <a href="#accueil">Accueil</a>
+          <a href="#a-propos">À propos</a>
+          <a href="#galerie">Galerie</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="accueil" class="hero">
+      <h1>Bienvenue à l'AS Menucourt</h1>
+      <p>Club local - passion, engagement et convivialité. Retrouvez ici les infos, la galerie et les moyens de contact.</p>
+      <p style="margin-top:.8rem"><a href="#contact" style="text-decoration:none"><button>Contactez-nous</button></a></p>
+    </section>
+
+    <section id="a-propos">
+      <h2>À propos</h2>
+      <div class="about">
+        <div class="card">
+          <p>L'AS Menucourt est un club de football amateur engagé dans le championnat départemental. Nous privilégions la formation, la cohésion et le plaisir de jouer. Notre équipe senior évolue en D4.</p>
+          <ul>
+            <li>Entraînements : mardi & jeudi</li>
+            <li>Stade : Stade Municipal de Menucourt</li>
+            <li>Contact : contact@menucourt-as.example</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Infos pratiques</h3>
+          <p style="color:var(--muted);font-size:.95rem">Accès aux séances, licence, équipement — retrouvez toutes les formalités auprès du club.</p>
+          <p style="margin-top:1rem"><strong>Téléphone</strong><br>+33 1 23 45 67 89</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="galerie">
+      <h2>Galerie</h2>
+      <div class="gallery-grid card" aria-live="polite">
+        <img src="stade-de-france.jpg" alt="Photo match 1" data-full="stade-de-france.jpg">
+        <img src="ballon.avif" alt="Photo match 2" data-full="ballon.avif">
+        <img src="equipe.jpg" alt="Photo match 3" data-full="equipe.jpg">
+        <img src="foot.jpg" alt="Photo équipe" data-full="foot.jpg">
+        <img src="https://picsum.photos/id/1052/800/600" alt="Photo stade" data-full="https://picsum.photos/id/1052/1200/900">
+        <img src="https://picsum.photos/id/1069/800/600" alt="Photo entraînement" data-full="https://picsum.photos/id/1069/1200/900">
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="card">
+        <form id="contactForm" onsubmit="return handleSubmit(event)">
+          <label for="name">Nom</label>
+          <input id="name" name="name" required>
+
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required>
+
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+
+          <div style="display:flex;gap:.6rem;justify-content:flex-end;margin-top:.5rem">
+            <button type="submit">Envoyer</button>
+            <button type="button" onclick="resetForm()" style="background:#e6edf0;color:var(--dark)">Réinitialiser</button>
+          </div>
+          <p id="formFeedback" style="margin-top:.6rem;color:var(--muted);font-size:.95rem"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© AS Menucourt — Tous droits réservés</div>
+  </footer>
+
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="content">
+      <button aria-label="Fermer" style="float:right;background:transparent;border:0;font-size:1.2rem;cursor:pointer" onclick="closeModal()">✕</button>
+      <img id="modalImg" src="" alt="Agrandissement">
+    </div>
+  </div>
+
+  <script>
+    // Défilement fluide
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const target=document.querySelector(a.getAttribute('href'));
+        if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'});}
+      });
+    });
+
+    // Menu hamburger
+    const hamburger=document.querySelector('.hamburger');
+    const navlinks=document.querySelector('.navlinks');
+    hamburger.addEventListener('click',()=>{
+      hamburger.classList.toggle('active');
+      navlinks.classList.toggle('show');
+    });
+
+    // Galerie
+    const modal=document.getElementById('modal');
+    const modalImg=document.getElementById('modalImg');
+    document.querySelectorAll('.gallery-grid img').forEach(img=>{
+      img.addEventListener('click',()=>{
+        modal.classList.add('show');
+        modal.setAttribute('aria-hidden','false');
+        modalImg.src=img.dataset.full||img.src;
+        modalImg.alt=img.alt;
+      });
+    });
+    function closeModal(){modal.classList.remove('show');modal.setAttribute('aria-hidden','true');modalImg.src='';}
+    modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
+
+    // Formulaire
+    function handleSubmit(e){
+      e.preventDefault();
+      const name=document.getElementById('name').value.trim();
+      const email=document.getElementById('email').value.trim();
+      const message=document.getElementById('message').value.trim();
+      const feedback=document.getElementById('formFeedback');
+      if(!name||!email||!message){
+        feedback.textContent='Merci de remplir tous les champs.';
+        return false;
+      }
+      feedback.textContent='Message prêt à être envoyé (pas de backend configuré).';
+      return false;
+    }
+    function resetForm(){
+      document.getElementById('contactForm').reset();
+      document.getElementById('formFeedback').textContent='';
+    }
+  </script>
 </body>
 </html>
