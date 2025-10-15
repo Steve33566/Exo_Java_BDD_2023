@@ -6,9 +6,9 @@
   <title>AS Menucourt - Site</title>
   <meta name="description" content="Site vitrine simple pour AS Menucourt - Accueil, À propos, Galerie, Contact">
   
-  <!-- 🌐 STYLE RESPONSIVE + MENU HAMBURGER -->
+  
   <style>
-    /* ---------- RESET & VARIABLES ---------- */
+    
     :root {
       --accent: #0077cc;
       --accent-light: #e0f2ff;
@@ -34,7 +34,7 @@
       padding: 1.2rem;
     }
 
-    /* ---------- HEADER ---------- */
+    
     header {
       background: var(--light);
       border-bottom: 1px solid #ddd;
@@ -60,7 +60,7 @@
       color: var(--accent);
     }
 
-    /* ---------- NAV LINKS ---------- */
+    
     .navlinks {
       display: flex;
       gap: 1rem;
@@ -75,7 +75,7 @@
 
     .navlinks a:hover { color: var(--accent); }
 
-    /* ---------- HAMBURGER ---------- */
+    
     .hamburger {
       display: none;
       flex-direction: column;
@@ -104,7 +104,7 @@
       transform: rotate(-45deg) translateY(-8px);
     }
 
-    /* ---------- HERO ---------- */
+    
     .hero {
       text-align: center;
       padding: 4rem 1rem;
@@ -123,7 +123,7 @@
 
     button {
       background: var(--accent);
-      color: #fff;
+      color: #ffffff;
       border: none;
       border-radius: var(--radius);
       padding: 0.6rem 1.2rem;
@@ -133,7 +133,7 @@
 
     button:hover { background: #005fa3; }
 
-    /* ---------- ABOUT ---------- */
+    
     .about {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -154,7 +154,7 @@
       font-size: 1.6rem;
     }
 
-    /* ---------- GALLERY ---------- */
+    
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -172,7 +172,7 @@
 
     .gallery-grid img:hover { transform: scale(1.03); }
 
-    /* ---------- CONTACT ---------- */
+    
     form {
       display: flex;
       flex-direction: column;
@@ -193,7 +193,7 @@
       box-shadow: 0 0 0 2px var(--accent-light);
     }
 
-    /* ---------- FOOTER ---------- */
+    
     footer {
       background: var(--dark);
       color: #fff;
@@ -202,7 +202,7 @@
       margin-top: 2rem;
     }
 
-    /* ---------- MODAL ---------- */
+    
     .modal {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -229,7 +229,7 @@
       border-radius: var(--radius);
     }
 
-    /* ---------- RESPONSIVE ---------- */
+    
     @media (max-width: 700px) {
       .hamburger { display: flex; }
 
@@ -271,7 +271,7 @@
           <span>AS Menucourt</span>
         </div>
 
-        <!-- 🌟 Bouton hamburger -->
+        
         <button class="hamburger" aria-label="Ouvrir le menu">
           <span></span><span></span><span></span>
         </button>
@@ -319,8 +319,7 @@
         <img src="ballon.avif" alt="Photo match 2" data-full="ballon.avif">
         <img src="equipe.jpg" alt="Photo match 3" data-full="equipe.jpg">
         <img src="foot.jpg" alt="Photo équipe" data-full="foot.jpg">
-        <img src="https://picsum.photos/id/1052/800/600" alt="Photo stade" data-full="https://picsum.photos/id/1052/1200/900">
-        <img src="https://picsum.photos/id/1069/800/600" alt="Photo entraînement" data-full="https://picsum.photos/id/1069/1200/900">
+
       </div>
     </section>
 
@@ -359,7 +358,7 @@
   </div>
 
   <script>
-    // Défilement fluide
+    
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
       a.addEventListener('click',e=>{
         const target=document.querySelector(a.getAttribute('href'));
@@ -367,7 +366,7 @@
       });
     });
 
-    // Menu hamburger
+    
     const hamburger=document.querySelector('.hamburger');
     const navlinks=document.querySelector('.navlinks');
     hamburger.addEventListener('click',()=>{
@@ -375,7 +374,7 @@
       navlinks.classList.toggle('show');
     });
 
-    // Galerie
+    
     const modal=document.getElementById('modal');
     const modalImg=document.getElementById('modalImg');
     document.querySelectorAll('.gallery-grid img').forEach(img=>{
@@ -389,7 +388,7 @@
     function closeModal(){modal.classList.remove('show');modal.setAttribute('aria-hidden','true');modalImg.src='';}
     modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
 
-    // Formulaire
+    
     function handleSubmit(e){
       e.preventDefault();
       const name=document.getElementById('name').value.trim();
